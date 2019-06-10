@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'KPDialogController'
-  s.version      = '1.1.3'
+  s.version      = '1.1.5'
   s.summary      = 'Created to have a customisable protocol oriented AlertController support for view controllers.'
   s.description  = <<-DESC
             Created to have a customisable protocol oriented AlertController support for view controllers. iOS custom dialog developed in swift considering protocol oriented programming.

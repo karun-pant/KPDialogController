@@ -14,7 +14,7 @@ protocol KPDAlertable: UIViewController {
     var messageAttributes: [NSAttributedString.Key: Any] { get set }
     var actionAttributes: [NSAttributedString.Key: Any] { get set }
     var alertBGColor: UIColor { get set }
-    func showGYAlert(title: String?, message: String?, actions: [String: (()->())?]?)
+    func showKPDialog(title: String?, message: String?, actions: [String: (()->())?]?)
 }
 
 extension KPDAlertable {
@@ -58,7 +58,7 @@ extension KPDAlertable {
         return nil
     }
     
-    func showGYAlert(title: String?, message: String?, actions: [String: (()->())?]?) {
+    func showKPDialog(title: String?, message: String?, actions: [String: (()->())?]?) {
         let storyBoard = UIStoryboard.init(name: "KPDC", bundle: nil)
         if let alertVC = storyBoard.instantiateInitialViewController() as? KPDialogController {
             alertVC.alertBGColor = alertBGColor
