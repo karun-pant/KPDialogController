@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol KPDAlertable: UIViewController {
+protocol KPDAlertable: AnyObject {
     var titleAttributes: [NSAttributedString.Key: Any] { get set }
     var messageAttributes: [NSAttributedString.Key: Any] { get set }
     var actionAttributes: [NSAttributedString.Key: Any] { get set }
@@ -17,7 +17,7 @@ protocol KPDAlertable: UIViewController {
     func showKPDialog(title: String?, message: String?, actions: [String: (()->())?]?)
 }
 
-extension KPDAlertable {
+extension KPDAlertable where Self: UIViewController {
     var titleAttributes: [NSAttributedString.Key: Any] {
         get {
             return [.font: UIFont.boldSystemFont(ofSize: 20), .kern: 0.2, .foregroundColor: UIColor.black];
