@@ -23,7 +23,7 @@ public class KPDialogController: UIViewController {
     
     var alertBGColor: UIColor?
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         configureAlert()
     }
