@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KPDialogController: UIViewController {
+public class KPDialogController: UIViewController {
     
     @IBOutlet weak var alertBG: UIView!
     @IBOutlet weak var headerView: UIView!

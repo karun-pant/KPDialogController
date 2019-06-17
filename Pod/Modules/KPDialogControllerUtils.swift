@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol KPDAlertable: AnyObject {
+public protocol KPDAlertable: AnyObject {
     var titleAttributes: [NSAttributedString.Key: Any] { get set }
     var messageAttributes: [NSAttributedString.Key: Any] { get set }
     var actionAttributes: [NSAttributedString.Key: Any] { get set }
