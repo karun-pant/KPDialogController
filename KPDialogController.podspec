@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 	s.name             = 'KPDialogController'
-	s.version          = '1.1.5'
+	s.version          = '1.1.7'
 	s.summary          = 'Created to have a customisable protocol oriented AlertController support for view controllers.'
 
 	s.homepage         = 'https://github.com/karun-pant/KPDialogController'
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.resource_bundles = {
     s.name => ['Pod/Resources/*']
   }
-  s.swift_version = '4.0'
+  s.swift_version = '5.0'
   s.frameworks = 'UIKit'
   # s.screenshots  = 'www.example.com/screenshots_1.gif', 'www.example.com/screenshots_2.gif'
 end
