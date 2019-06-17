@@ -1,9 +1,9 @@
 //
-//  GYAlertContorllerUtils.swift
-//  GYAlertController
+//  KPDAlertable.swift
+//  KPDAlertable
 //
-//  Created by GeekYondaime on 05/06/19.
-//  Copyright © 2019 GeekYondaime. All rights reserved.
+//  Created by Karun on 10/06/19.
+//  Copyright © 2019 KarunPant. All rights reserved.
 //
 
 import Foundation
