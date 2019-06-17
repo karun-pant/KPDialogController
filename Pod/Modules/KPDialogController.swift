@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class KPDialogController: UIViewController {
+open class KPDialogController: UIViewController {
     
     @IBOutlet weak var alertBG: UIView!
     @IBOutlet weak var headerView: UIView!
@@ -23,7 +23,7 @@ public class KPDialogController: UIViewController {
     
     var alertBGColor: UIColor?
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         configureAlert()
     }

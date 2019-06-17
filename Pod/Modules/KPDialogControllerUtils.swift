@@ -17,7 +17,7 @@ public protocol KPDAlertable: AnyObject {
     func showKPDialog(title: String?, message: String?, actions: [String: (()->())?]?)
 }
 
-extension KPDAlertable where Self: UIViewController {
+public extension KPDAlertable where Self: UIViewController {
     var titleAttributes: [NSAttributedString.Key: Any] {
         get {
             return [.font: UIFont.boldSystemFont(ofSize: 20), .kern: 0.2, .foregroundColor: UIColor.black];
