@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public protocol KPDAlertable: AnyObject {
+public protocol KPDAlertable: UIViewController {
     var titleAttributes: [NSAttributedString.Key: Any] { get set }
     var messageAttributes: [NSAttributedString.Key: Any] { get set }
     var actionAttributes: [NSAttributedString.Key: Any] { get set }
@@ -17,7 +17,7 @@ public protocol KPDAlertable: AnyObject {
     func showKPDialog(title: String?, message: String?, actions: [String: (()->())?]?)
 }
 
-public extension KPDAlertable where Self: UIViewController {
+public extension KPDAlertable {
     var titleAttributes: [NSAttributedString.Key: Any] {
         get {
             return [.font: UIFont.boldSystemFont(ofSize: 20), .kern: 0.2, .foregroundColor: UIColor.black];
@@ -59,14 +59,31 @@ public extension KPDAlertable where Self: UIViewController {
     }
     
     func showKPDialog(title: String?, message: String?, actions: [String: (()->())?]?) {
-        let storyBoard = UIStoryboard.init(name: "KPDC", bundle: nil)
-        if let alertVC = storyBoard.instantiateInitialViewController() as? KPDialogController {
-            alertVC.alertBGColor = alertBGColor
-            alertVC.initialize(title: getAttributed(title, attributes: titleAttributes),
-                               message: getAttributed(message, attributes: messageAttributes),
-                               actions: getAttributedActions(actions))
-            self.present(alertVC, animated: true, completion: nil)
+        if let resourceBundle = Bundle.getResourcesBundle(){
+            if let storyboardURL = resourceBundle.url(forResource: "KPDC", withExtension: "storyboard") {
+                debugPrint(storyboardURL)
+            }else {
+                debugPrint("not found")
+            }
+            let storyBoard = UIStoryboard.init(name: "KPDC", bundle: resourceBundle)
+            if let alertVC = storyBoard.instantiateInitialViewController() as? KPDialogController {
+                alertVC.alertBGColor = alertBGColor
+                alertVC.initialize(title: getAttributed(title, attributes: titleAttributes),
+                                   message: getAttributed(message, attributes: messageAttributes),
+                                   actions: getAttributedActions(actions))
+                self.present(alertVC, animated: true, completion: nil)
+            }
         }
     }
     
+}
+extension Bundle {
+    static func getResourcesBundle() -> Bundle? {
+        let bundle = Bundle.init(identifier: "org.cocoapods.KPDialogController")
+        return bundle
+//        guard let resourcesBundleUrl = bundle.resourceURL?.appendingPathComponent("KPDialogController") else {
+//            return nil
+//        }
+//        return Bundle(url: resourcesBundleUrl)
+    }
 }
