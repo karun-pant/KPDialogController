@@ -60,17 +60,22 @@ public extension KPDAlertable {
     
     func showKPDialog(title: String?, message: String?, actions: [String: (()->())?]?) {
         if let resourceBundle = Bundle.getResourcesBundle(){
-            if let storyboardURL = resourceBundle.url(forResource: "KPDC", withExtension: "storyboard") {
-                debugPrint(storyboardURL)
-            }else {
-                debugPrint("not found")
-            }
+//            debugPrint(resourceBundle.bundleIdentifier)
+//            debugPrint(resourceBundle.bundlePath)
+//            debugPrint(resourceBundle.resourcePath)
+//            if let storyboardURL = resourceBundle.url(forResource: "KPDC", withExtension: "storyboard") {
+//                debugPrint(storyboardURL)
+//            }else {
+//                debugPrint("not found")
+//            }
             let storyBoard = UIStoryboard.init(name: "KPDC", bundle: resourceBundle)
             if let alertVC = storyBoard.instantiateInitialViewController() as? KPDialogController {
                 alertVC.alertBGColor = alertBGColor
                 alertVC.initialize(title: getAttributed(title, attributes: titleAttributes),
                                    message: getAttributed(message, attributes: messageAttributes),
                                    actions: getAttributedActions(actions))
+                alertVC.modalPresentationStyle = .overCurrentContext
+                alertVC.modalTransitionStyle = .crossDissolve
                 self.present(alertVC, animated: true, completion: nil)
             }
         }
@@ -80,10 +85,9 @@ public extension KPDAlertable {
 extension Bundle {
     static func getResourcesBundle() -> Bundle? {
         let bundle = Bundle.init(identifier: "org.cocoapods.KPDialogController")
-        return bundle
-//        guard let resourcesBundleUrl = bundle.resourceURL?.appendingPathComponent("KPDialogController") else {
-//            return nil
-//        }
-//        return Bundle(url: resourcesBundleUrl)
+        guard let resourcesBundleUrl = bundle?.resourceURL?.appendingPathComponent("KPDialogController.bundle") else {
+            return nil
+        }
+        return Bundle(url: resourcesBundleUrl)
     }
 }
