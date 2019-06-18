@@ -17,7 +17,7 @@ open class KPDialogController: UIViewController {
     
     @IBOutlet weak var buttonStack: UIStackView!
     
-    private var alertActions: [NSAttributedString: (()->())?]?
+    private var alertActions: [KPDialogAction]?
     private var alertTitle: NSAttributedString?
     private var alertMessage: NSAttributedString?
     
@@ -40,7 +40,7 @@ open class KPDialogController: UIViewController {
         alertBG.layer.shadowRadius = 24
     }
     
-    func initialize(title: NSAttributedString?, message: NSAttributedString?, actions: [NSAttributedString: (()->())?]?) {
+    func initialize(title: NSAttributedString?, message: NSAttributedString?, actions: [KPDialogAction]?) {
         self.alertTitle = title
         self.alertMessage = message
         self.alertActions = actions
@@ -49,8 +49,7 @@ open class KPDialogController: UIViewController {
     private func createAndAddActions() {
         if let actions = alertActions, actions.count > 0 {
             actions.enumerated().forEach { (offset, action) in
-                let (key, _) = action
-                let actionButton = createButton(key, tag: offset, actionCount: actions.count)
+                let actionButton = createButton(action.attributedTitle, tag: offset, actionCount: actions.count)
                 buttonStack.addArrangedSubview(actionButton)
             }
         }else {
@@ -92,13 +91,12 @@ open class KPDialogController: UIViewController {
     }
     
     @objc private func onTapActionButton(_ sender: UIButton) {
-        if let actions = alertActions {
-            if let title = sender.attributedTitle(for: .normal), let action = actions[title], let onTap = action {
+        if let actions = alertActions, (actions.count - 1) <= sender.tag {
+            let selectedAction = actions[sender.tag]
+            if let onTap = selectedAction.onTap {
                 onTap()
-                self.dismiss(animated: true, completion: nil)
-            }else {
-                self.dismiss(animated: true, completion: nil)
             }
+            self.dismiss(animated: true, completion: nil)
         } else {
             self.dismiss(animated: true, completion: nil)
         }

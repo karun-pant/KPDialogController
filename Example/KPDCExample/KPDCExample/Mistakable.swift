@@ -16,12 +16,8 @@ protocol Mistakable: KPDAlertable {
 
 extension Mistakable {
     func showAlert() {
-        let actions = ["Ok": {
-            debugPrint("OK Pressed")
-            },
-                       "Cancel": {
-                        debugPrint("Cancel Pressed")
-            }];
+        let actions: [KPDialogAction] = [KPDialogAction("OK", onTap: { debugPrint("OK Tapped") }), KPDialogAction("CANCEL", onTap: { debugPrint("CANCEL Tapped") })]
+        
         self.showKPDialog(title: "Hello", message: "This message is to show that message is available here for you to edit.", actions: actions)
     }
 }

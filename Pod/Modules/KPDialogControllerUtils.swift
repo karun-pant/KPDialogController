@@ -9,12 +9,49 @@
 import Foundation
 import UIKit
 
+final class BundleProvider {
+    static var shared: BundleProvider = BundleProvider()
+    private var _bundle: Bundle? = nil
+    var bundle: Bundle? {
+        get {
+            if _bundle == nil, let resourceBundle = Bundle.init(identifier: "org.cocoapods.KPDialogController") {
+                if let resourcesBundleUrl = resourceBundle.resourceURL?.appendingPathComponent("KPDialogController.bundle") {
+                    _bundle = Bundle(url: resourcesBundleUrl)
+                }
+            }
+            return _bundle
+        }
+    }
+    private init() {
+        
+    }
+}
+
+public class KPDialogAction {
+    var title: String
+    var onTap: (()->())?
+    var attributedTitle: NSAttributedString!
+    public init(_ name: String, onTap: (() -> ())?) {
+        self.title = name
+        self.onTap = onTap
+    }
+    
+}
+
 public protocol KPDAlertable: UIViewController {
     var titleAttributes: [NSAttributedString.Key: Any] { get set }
     var messageAttributes: [NSAttributedString.Key: Any] { get set }
     var actionAttributes: [NSAttributedString.Key: Any] { get set }
     var alertBGColor: UIColor { get set }
-    func showKPDialog(title: String?, message: String?, actions: [String: (()->())?]?)
+    
+    
+    /// Method will be used for creating and presenting dialog.
+    ///
+    /// - Parameters:
+    ///   - title: header title to be shown.
+    ///   - message: description of alert.
+    ///   - actions: list of KPDialogAction [KPDialogAction("<title>", onTap: { debugPrint("action Tapped") })]
+    func showKPDialog(title: String?, message: String?, actions: [KPDialogAction]?)
 }
 
 public extension KPDAlertable {
@@ -45,12 +82,13 @@ public extension KPDAlertable {
         return nil
     }
     
-    private func getAttributedActions(_ actions: [String: (()->())?]?) -> [NSAttributedString: (()->())?]? {
+    private func getAttributedActions(_ actions: [KPDialogAction]?) -> [KPDialogAction]? {
         if let actions = actions {
-            var attributedActions: [NSAttributedString: (()->())?] = [NSAttributedString: (()->())?]()
-            actions.keys.forEach({ key in
-                if let attributedAction = getAttributed(key, attributes: actionAttributes) {
-                    attributedActions[attributedAction] = actions[key]
+            var attributedActions: [KPDialogAction] = [KPDialogAction]()
+            actions.forEach({ action in
+                if let attributedAction = getAttributed(action.title, attributes: actionAttributes) {
+                    action.attributedTitle = attributedAction
+                    attributedActions.append(action)
                 }
             })
             return attributedActions
@@ -58,16 +96,8 @@ public extension KPDAlertable {
         return nil
     }
     
-    func showKPDialog(title: String?, message: String?, actions: [String: (()->())?]?) {
-        if let resourceBundle = Bundle.getResourcesBundle(){
-//            debugPrint(resourceBundle.bundleIdentifier)
-//            debugPrint(resourceBundle.bundlePath)
-//            debugPrint(resourceBundle.resourcePath)
-//            if let storyboardURL = resourceBundle.url(forResource: "KPDC", withExtension: "storyboard") {
-//                debugPrint(storyboardURL)
-//            }else {
-//                debugPrint("not found")
-//            }
+    func showKPDialog(title: String?, message: String?, actions: [KPDialogAction]?) {
+        if let resourceBundle = BundleProvider.shared.bundle {
             let storyBoard = UIStoryboard.init(name: "KPDC", bundle: resourceBundle)
             if let alertVC = storyBoard.instantiateInitialViewController() as? KPDialogController {
                 alertVC.alertBGColor = alertBGColor
@@ -79,15 +109,5 @@ public extension KPDAlertable {
                 self.present(alertVC, animated: true, completion: nil)
             }
         }
-    }
-    
-}
-extension Bundle {
-    static func getResourcesBundle() -> Bundle? {
-        let bundle = Bundle.init(identifier: "org.cocoapods.KPDialogController")
-        guard let resourcesBundleUrl = bundle?.resourceURL?.appendingPathComponent("KPDialogController.bundle") else {
-            return nil
-        }
-        return Bundle(url: resourcesBundleUrl)
     }
 }
