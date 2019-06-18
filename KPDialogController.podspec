@@ -15,6 +15,5 @@ Pod::Spec.new do |s|
 	
   s.swift_version = '5.0'
 	s.frameworks = 'UIKit'
-	
-  # s.screenshots  = 'www.example.com/screenshots_1.gif', 'www.example.com/screenshots_2.gif'
+	s.screenshot = 'https://raw.githubusercontent.com/karun-pant/KPDialogController/master/Example/Screenshots/alert.png'
 end
