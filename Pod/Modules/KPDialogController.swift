@@ -71,20 +71,24 @@ open class KPDialogController: UIViewController {
             selectionAttributes[.foregroundColor] = foreColor.withAlphaComponent(alpha/2.0)
         }
         actionButton.setAttributedTitle(NSAttributedString.init(string: title.string, attributes: selectionAttributes), for: .highlighted)
-        actionButton.contentEdgeInsets = .init(top: 16, left: 24, bottom: 16, right: 24)
+        
         if actionCount >= 2 {
             if tag == 0 {
                 //first
                 actionButton.contentHorizontalAlignment = .left
+                actionButton.contentEdgeInsets = .init(top: 16, left: 24, bottom: 16, right: 5)
             }else if tag == actionCount - 1 {
                 //last
                 actionButton.contentHorizontalAlignment = .right
+                actionButton.contentEdgeInsets = .init(top: 16, left: 5, bottom: 16, right: 24)
             }else {
                 //others
                 actionButton.contentHorizontalAlignment = .center
+                actionButton.contentEdgeInsets = .init(top: 16, left: 10, bottom: 16, right: 10)
             }
         }else {
             actionButton.contentHorizontalAlignment = .right
+            actionButton.contentEdgeInsets = .init(top: 16, left: 10, bottom: 16, right: 24)
         }
         
         return actionButton
