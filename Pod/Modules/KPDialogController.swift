@@ -95,14 +95,15 @@ open class KPDialogController: UIViewController {
     }
     
     @objc private func onTapActionButton(_ sender: UIButton) {
-        if let actions = alertActions, (actions.count - 1) <= sender.tag {
-            let selectedAction = actions[sender.tag]
-            if let onTap = selectedAction.onTap {
-                onTap()
+        let allActions = self.alertActions
+        let index = sender.tag
+        self.dismiss(animated: true) {
+            if let actions = allActions, (actions.count - 1) >= index {
+                let selectedAction = actions[sender.tag]
+                if let onTap = selectedAction.onTap {
+                    onTap()
+                }
             }
-            self.dismiss(animated: true, completion: nil)
-        } else {
-            self.dismiss(animated: true, completion: nil)
         }
     }
 }

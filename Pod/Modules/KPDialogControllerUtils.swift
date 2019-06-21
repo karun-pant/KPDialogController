@@ -27,7 +27,7 @@ final class BundleProvider {
     }
 }
 
-public class KPDialogAction {
+public struct KPDialogAction {
     var title: String
     var onTap: (()->())?
     var attributedTitle: NSAttributedString!
@@ -86,9 +86,10 @@ public extension KPDAlertable {
         if let actions = actions {
             var attributedActions: [KPDialogAction] = [KPDialogAction]()
             actions.forEach({ action in
-                if let attributedAction = getAttributed(action.title, attributes: actionAttributes) {
-                    action.attributedTitle = attributedAction
-                    attributedActions.append(action)
+                var tempAction = action
+                if let attributedAction = getAttributed(tempAction.title, attributes: actionAttributes) {
+                    tempAction.attributedTitle = attributedAction
+                    attributedActions.append(tempAction)
                 }
             })
             return attributedActions
