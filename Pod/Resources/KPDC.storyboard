@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t6R-Fd-kvS">
-                                <rect key="frame" x="20" y="386" width="374" height="134"/>
+                                <rect key="frame" x="20" y="383" width="374" height="140"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCi-wE-TaJ">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="64"/>
@@ -51,10 +51,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Onf-f7-e2f">
-                                        <rect key="frame" x="0.0" y="84" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="84" width="374" height="36"/>
                                         <color key="backgroundColor" red="0.74509803919999995" green="0.18039215689999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="aJZ-L0-KYZ"/>
+                                            <constraint firstAttribute="height" constant="36" id="aJZ-L0-KYZ"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -64,7 +64,7 @@
                                     <constraint firstItem="RCi-wE-TaJ" firstAttribute="leading" secondItem="t6R-Fd-kvS" secondAttribute="leading" id="21J-ZJ-WAn"/>
                                     <constraint firstAttribute="trailing" secondItem="Onf-f7-e2f" secondAttribute="trailing" id="3Av-Lj-LSX"/>
                                     <constraint firstItem="RCi-wE-TaJ" firstAttribute="top" secondItem="t6R-Fd-kvS" secondAttribute="top" id="EoH-EW-HoR"/>
-                                    <constraint firstAttribute="bottom" secondItem="Onf-f7-e2f" secondAttribute="bottom" id="JgO-TL-SmD"/>
+                                    <constraint firstAttribute="bottom" secondItem="Onf-f7-e2f" secondAttribute="bottom" constant="20" id="JgO-TL-SmD"/>
                                     <constraint firstItem="Onf-f7-e2f" firstAttribute="leading" secondItem="t6R-Fd-kvS" secondAttribute="leading" id="LNw-Oz-C4Q"/>
                                     <constraint firstItem="Onf-f7-e2f" firstAttribute="top" secondItem="yW2-et-iYq" secondAttribute="bottom" constant="20" id="aTv-jp-s5r"/>
                                     <constraint firstAttribute="trailing" secondItem="RCi-wE-TaJ" secondAttribute="trailing" id="k2M-Id-CuV"/>

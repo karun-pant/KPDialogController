@@ -1,5 +1,5 @@
 PODS:
-  - KPDialogController (1.3.4)
+  - KPDialogController (1.3.5)
 
 DEPENDENCIES:
   - KPDialogController (from `../../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  KPDialogController: f23e941f7d9d3131c2b25fd1e04e6ff7dff83aaa
+  KPDialogController: f5d47c58d8b6b33e434711c908ce7953d359b003
 
 PODFILE CHECKSUM: bbd5ba7f721cb01d417c3ece0817d19e952cb7a4
 
